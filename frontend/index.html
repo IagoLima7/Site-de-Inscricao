@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulário Simples</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  </head>
+  <body class="bg-gradient-to-br from-blue-100 to-purple-100 min-h-screen flex items-center justify-center p-4">
+    
+    <div class="md:w-1/2 flex items-center justify-center bg-blue-50 p-6">
+     <img src="assets/img_incial.png" alt="Imagem Inicial" class="w-72 mx-auto mb-5" />
+    </div>
+
+    <div class="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
+     <h2 class="text-2x1 font-bold text-center text-gray-800 mb-6">Se Inscreva</h2>
+
+    <form id="formulario">
+      <div class="relative flex items-center mb-2">
+        <label for="nome" class="mr-2 text-sm font-semibold text-black-700 ">Nome:</label>
+          <input type="text" id="nome" placeholder="Seu nome" required
+          class="pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"  />
+          <i class="fa-solid fa-user absolute left-14"></i>
+      </div>
+      <div class="relative flex items-center mb-2">
+        <label for="email" class="mr-3 text-sm font-semibold text-black-700">Email:</label>
+          <input type="email" id="email" placeholder="Digite seu E-mail" required
+          class="pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" /> 
+          <i class="fa-solid fa-envelope absolute left-14"></i>
+      </div>
+      <div class="relative flex items-center mb-2">
+        <label for="telefone" class="mr-2 text-sm font-semibold text-black-700">Telefone:</label> 
+          <input type="text" id="telefone" placeholder="Digite seu telefone" required
+          class="pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <i class="fa-solid fa-phone absolute left-20"></i> 
+      </div>
+      <div class="relative flex items-center mb-2">
+        <label for="data_nascimento" class="mr-2 text-sm font-semibold text-black-700">Data de Nascimento:</label>
+          <input type="text" id="data_nascimento" placeholder="DD/MM/YYYY" required
+          class="pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <i class="fa-solid fa-calendar absolute left-40"></i>
+      </div>
+      <img >
+      <button 
+        type="submit"
+        class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-md shadow-md transition duration-200 ease-in-out"
+      >Enviar</button>
+    </form>
+    <p id="mensagem">&nbsp;</p>
+
+    <script>
+      const form = document.getElementById("formulario");
+      const mensagem = document.getElementById("mensagem");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const nome = document.getElementById("nome").value;
+        const email = document.getElementById("email").value;
+        const telefone = document.getElementById("telefone").value;
+        const data_nascimento = document.getElementById("data_nascimento").value;
+
+
+        try {
+          const resposta = await fetch("http://localhost:8080/enviar", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ 
+              nome: nome,
+              email: email,
+              telefone: telefone,
+              data_nascimento: data_nascimento, 
+            }),
+          });
+          const urlParams = new URLSearchParams({
+            nome,
+            email,
+            telefone,
+            data_nascimento,
+          });
+
+          const novaURL = `http://localhost:8080/sucesso?${urlParams.toString()}`;
+          window.open(novaURL, "_blank");
+  
+        } catch (erro) {
+          mensagem.textContent = "Erro ao enviar os dados.";
+          console.error("Erro na requisição:", erro);
+        }
+      });
+    </script>
+  </body>
+</html>

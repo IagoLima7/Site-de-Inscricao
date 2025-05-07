@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dados Enviados com Sucesso</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body class="bg-gray-100 min-h-screen flex items-center justify-center px-4">
+    <div class="bg-white shadow-2xl rounded-2xl p-10 max-w-md w-full text-center">
+         
+            <img src="/static/img_sucesso.png" alt="Sucesso" class="" />
+
+    <h1 class="text-2xl font-bold text-gray-800 mb-2">Inscrição Enviada com Sucesso</h1>
+    <p class="text-gray-600 mb-6">Obrigado, <span class="font-semibold">{{ nome }}</span>! O IFMA agradece.</p>
+
+    <div class="text-left">
+        <ul class="space-y-2 text-gray-700">
+            <li>
+                <strong class="text-gray-900">Nome:</strong>  {{ nome }}
+            </li>
+            <li>
+                <strong class="text-gray-900">Email:</strong> {{ email }}
+            </li>
+            <li>
+                <strong class="text-gray-900">Telefone:</strong> {{ telefone }}
+            </li>
+            <li>
+                <strong class="text-gray-900">Data de Nascimento:</strong> {{ data_nascimento }}
+            </li>
+        </ul>
+    </div>
+
+    <div class="mt-8">
+        <a href="{front_url}/index.html"
+        class=" font-semibold bg-green-500  hover:bg-green-600 text-white px-6 py-2 rounded-md transition duration-300"
+        >
+          Home
+        </a>
+    </div>
+  </body>
+</html>
